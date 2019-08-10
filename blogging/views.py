@@ -3,7 +3,7 @@ from django.template import loader
 from blogging.models import Post
 from django import forms
 from django.utils import timezone
-from blogging.forms import Create_PostForm
+from blogging.forms import CreatePostForm
 from .import forms
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -50,14 +50,14 @@ def detail_view(request, post_id):
 def create_postview(request):
     
     if request.method == "POST":
-        form = forms.Create_PostForm(request.POST)
+        form = forms.CreatePostForm(request.POST)
         if form.is_valid():
             model_instance = form.save(commit=False)
-            model_instance.author= request.user
             model_instance.save()
-            return redirect(request,'blogging/list.html',{'post':posts}) 
+            return HttpResponseRedirect ("/") 
+            
     else: 
-        form = Create_PostForm() 
+        form = CreatePostForm() 
         return render(request, "blogging/create_post.html", {'form': form})
 
 # Create your views here.

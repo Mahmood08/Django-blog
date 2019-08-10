@@ -1,7 +1,7 @@
 from django.forms import ModelForm
-from blogging.models import Create_Post
+from blogging.models import CreatePost
  
-class Create_PostForm(ModelForm):
+class CreatePostForm(ModelForm):
     class Meta:
-        model = Create_Post
-        fields = ['title', 'text']
+        model = CreatePost
+        fields = ['title', 'text', 'author']
