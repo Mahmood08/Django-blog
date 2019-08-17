@@ -3,7 +3,11 @@ from django.template import loader
 from blogging.models import Post
 from django import forms
 from django.utils import timezone
+<<<<<<< HEAD
 from blogging.forms import Create_PostForm
+=======
+from blogging.forms import CreatePostForm
+>>>>>>> 7f8b50a7ba195d5b6d9dd1cb0990038cf971d629
 from .import forms
 
 from django.http import HttpResponse, HttpResponseRedirect, Http404
@@ -47,6 +51,7 @@ def detail_view(request, post_id):
 
 
             
+<<<<<<< HEAD
 def create_postview(request):    
     if request.method == "POST":
         form = forms.Create_PostForm(request.POST)
@@ -57,6 +62,19 @@ def create_postview(request):
             return HttpResponseRedirect ("/") 
     else: 
         form = Create_PostForm() 
+=======
+def create_postview(request):
+    
+    if request.method == "POST":
+        form = forms.CreatePostForm(request.POST)
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.save()
+            return HttpResponseRedirect ("/") 
+            
+    else: 
+        form = CreatePostForm() 
+>>>>>>> 7f8b50a7ba195d5b6d9dd1cb0990038cf971d629
         return render(request, "blogging/create_post.html", {'form': form})
 
 # Create your views here.

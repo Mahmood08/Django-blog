@@ -6,6 +6,21 @@ class Post(models.Model):
     title = models.CharField(max_length=128)
     text = models.TextField(blank=True)
     author = models.ForeignKey(User,on_delete=models.CASCADE)
+<<<<<<< HEAD
+=======
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+    published_date = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+
+class CreatePost(models.Model):
+    title = models.CharField(max_length=128)
+    text = models.TextField(blank=True)   
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+>>>>>>> 7f8b50a7ba195d5b6d9dd1cb0990038cf971d629
     created_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
     published_date = models.DateTimeField(blank=True, null=True)
