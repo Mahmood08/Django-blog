@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.template import loader
 from blogging.models import Post
+from django import forms
+from django.utils import timezone
+from blogging.forms import Create_PostForm
+from .import forms
+
 from django.http import HttpResponse, HttpResponseRedirect, Http404
 
 def stub_view(request, *args, **kwargs):
@@ -39,5 +44,19 @@ def detail_view(request, post_id):
         raise Http404
     context = {'post': post}
     return render(request, 'blogging/detail.html', context)
+
+
+            
+def create_postview(request):    
+    if request.method == "POST":
+        form = forms.Create_PostForm(request.POST)
+        if form.is_valid():
+            model_instance = form.save(commit=False)
+            model_instance.author= request.user
+            model_instance.save()
+            return HttpResponseRedirect ("/") 
+    else: 
+        form = Create_PostForm() 
+        return render(request, "blogging/create_post.html", {'form': form})
 
 # Create your views here.
